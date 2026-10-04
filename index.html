@@ -177,6 +177,12 @@
         <div class="key-box" id="licenseKey">—</div>
         <button class="btn btn-secondary" onclick="copyKey()" style="margin-bottom:10px;">📋 Копировать</button>
 
+        <!-- === ЛАУНЧЕР === -->
+        <div class="section">Клиент</div>
+        <button class="btn btn-primary" onclick="downloadLauncher()" style="margin-bottom:10px;">
+            🖥 Скачать лаунчер
+        </button>
+
         <div class="section">Смена пароля</div>
         <div class="field"><input id="newPassword" type="password" placeholder="Новый пароль"></div>
         <button class="btn btn-primary" id="changePassBtn">Сменить пароль</button>
@@ -194,8 +200,9 @@
 </div>
 
 <script>
-// ⚠️ ЗАМЕНИ НА СВОЙ URL С RENDER
+// ⚠️ ЗАМЕНИ НА СВОЙ URL
 const SERVER_URL = "https://affitcrash-server.onrender.com";
+const LAUNCHER_DOWNLOAD_URL = "https://www.dropbox.com/scl/fi/n6h9yhepnvojyeud0j6us/AffitCrash_v1-1.exe?rlkey=b8l98wxzs51aho87tbq3v9nu9&st=v5983mna&dl=1";
 
 let currentToken = null;
 let currentUser = null;
@@ -290,6 +297,12 @@ function showCabinet() {
         $('adminBlock').style.display = 'block';
         loadUsers();
     }
+}
+
+// === СКАЧИВАНИЕ ЛАУНЧЕРА ===
+function downloadLauncher() {
+    window.open(LAUNCHER_DOWNLOAD_URL, '_blank');
+    setStatus('cabStatusMsg', '📥 Начинается скачивание лаунчера...', 'info');
 }
 
 function copyKey() {
@@ -402,7 +415,6 @@ function logout() {
     showScreen('authScreen');
 }
 
-// Автовход
 window.addEventListener('load', () => {
     const t = sessionStorage.getItem('ac_token');
     const u = sessionStorage.getItem('ac_user');
