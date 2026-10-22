@@ -3,427 +3,796 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AffitCrash — Лицензия</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<title>AffitCrash — Мод для Minecraft</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-        --bg: #0A0818; --panel: #1A1730; --panel-2: #232042;
-        --accent: #5B6CFF; --accent-p: #9D4EDD;
-        --hover: #7B8BFF; --hover-p: #B56FEE;
-        --text: #FFFFFF; --text-dim: #B8B4D6; --border: #3D3870;
-        --success: #3AD68A; --error: #FF5C7A; --warn: #FFB84C;
+        --bg: #0E0E10; --panel: #18181B; --panel-2: #27272A; --border: #3F3F46;
+        --accent: #CCFF00; --accent-hover: #B3E600; --text: #FFFFFF; --text-dim: #A1A1AA;
+        --success: #22C55E; --error: #EF4444; --warning: #F59E0B;
     }
-    html, body { height: 100%; background: var(--bg); color: var(--text);
-        font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    a { color: var(--accent); text-decoration: none; cursor: pointer; }
+    .svg-icon { width: 20px; height: 20px; fill: currentColor; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .svg-icon.lg { width: 28px; height: 28px; }
+    .svg-icon.sm { width: 16px; height: 16px; }
 
-    .bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.45;
-        animation: float 20s ease-in-out infinite; }
-    .b1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -150px; }
-    .b2 { width: 600px; height: 600px; background: var(--accent-p); bottom: -200px; right: -200px; animation-delay: -8s; }
-    @keyframes float { 0%,100% { transform: translate(0,0) } 50% { transform: translate(80px,-60px) } }
+    /* ШАПКА */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(14, 14, 16, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; }
+    .nav-logo-icon { width: 32px; height: 32px; background: var(--accent); color: #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { color: var(--text-dim); font-weight: 600; font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-btn { padding: 10px 20px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; }
+    .nav-btn:hover { background: var(--accent-hover); }
+    .nav-btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .nav-btn-outline:hover { background: var(--panel); }
 
-    .screen { position: absolute; inset: 0; display: flex; align-items: center;
-        justify-content: center; padding: 20px; z-index: 2;
-        opacity: 0; pointer-events: none; transition: all 0.4s; }
-    .screen.active { opacity: 1; pointer-events: all; }
+    /* ОБЩИЕ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 80px 0; }
+    .section-title { font-size: 40px; font-weight: 900; text-align: center; margin-bottom: 16px; }
+    .section-subtitle { font-size: 16px; color: var(--text-dim); text-align: center; margin-bottom: 60px; }
 
-    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
-        padding: 32px; width: 100%; max-width: 420px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
-    .panel::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 2px;
-        background: linear-gradient(90deg, transparent, var(--accent), var(--accent-p), transparent); }
+    /* HERO */
+    .hero { padding: 100px 0 80px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 24px; }
+    .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 10px var(--success); }
+    .hero h1 { font-size: 68px; font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-btn { padding: 16px 32px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; border: none; font-family: inherit; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .hero-btn.primary { background: var(--accent); color: #000; }
+    .hero-btn.primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .hero-btn.secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+    .hero-btn.secondary:hover { background: var(--panel-2); }
 
-    .logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
-    .logo-icon { width: 40px; height: 40px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-p));
-        border-radius: 12px; display: flex; align-items: center; justify-content: center;
-        font-weight: 800; font-size: 20px; }
-    .logo h1 { font-size: 22px; font-weight: 800;
-        background: linear-gradient(135deg, #fff, var(--text-dim));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ВОЗМОЖНОСТИ */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 32px 24px; transition: 0.3s; }
+    .feature:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .feature-icon { width: 48px; height: 48px; background: var(--accent); color: #000; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .feature h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .feature p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
 
-    .subtitle { text-align: center; color: var(--text-dim); font-size: 11px;
-        margin-bottom: 22px; letter-spacing: 0.5px; text-transform: uppercase; }
+    /* ТАРИФЫ */
+    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .price-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px 32px; position: relative; }
+    .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(204, 255, 0, 0.15); }
+    .price-card.featured::before { content: 'ПОПУЛЯРНЫЙ'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 4px 16px; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: 1px; }
+    .price-name { font-size: 20px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .price-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 24px; min-height: 40px; }
+    .price-value { font-size: 48px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: baseline; gap: 4px; }
+    .price-value small { font-size: 16px; font-weight: 600; color: var(--text-dim); }
+    .price-features { list-style: none; margin: 24px 0; }
+    .price-features li { padding: 8px 0; font-size: 14px; display: flex; gap: 10px; align-items: center; }
+    .price-btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .price-btn.primary { background: var(--accent); color: #000; }
+    .price-btn.primary:hover { background: var(--accent-hover); }
+    .price-btn.secondary { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
+    .price-btn.secondary:hover { background: var(--border); }
 
-    .tabs { display: flex; gap: 6px; background: var(--panel-2);
-        padding: 4px; border-radius: 12px; margin-bottom: 18px; }
-    .tab { flex: 1; padding: 10px; background: transparent; border: none;
-        border-radius: 8px; color: var(--text-dim); cursor: pointer;
-        font-weight: 600; font-size: 13px; font-family: inherit; transition: all 0.2s; }
-    .tab.active { color: #fff;
-        background: linear-gradient(135deg, var(--accent), var(--accent-p)); }
+    /* МОДАЛЬНОЕ ОКНО */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .modal-close:hover { background: var(--border); color: var(--text); }
+    .modal h2 { font-size: 24px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
 
-    .field { margin-bottom: 12px; }
-    input { width: 100%; padding: 12px 14px; background: var(--panel-2);
-        border: 1px solid var(--border); border-radius: 10px; color: #fff;
-        font-size: 14px; font-family: inherit; outline: none; transition: all 0.2s; }
-    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(91,108,255,0.15); }
+    /* ФОРМЫ */
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .field input, .field textarea { width: 100%; padding: 12px 16px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; transition: 0.2s; }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); }
+    .field textarea { resize: vertical; min-height: 80px; }
 
-    .btn { width: 100%; padding: 12px; border: none; border-radius: 10px;
-        font-weight: 600; font-size: 14px; cursor: pointer; font-family: inherit;
-        transition: all 0.2s; display: flex; align-items: center;
-        justify-content: center; gap: 8px; }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-p));
-        color: #fff; box-shadow: 0 4px 20px rgba(91,108,255,0.4); margin-bottom: 10px; }
-    .btn-primary:hover:not(:disabled) { transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(91,108,255,0.6); }
-    .btn-secondary { background: var(--panel-2); color: var(--text);
-        border: 1px solid var(--border); }
-    .btn-secondary:hover { border-color: var(--accent); }
-    .btn-danger { background: linear-gradient(135deg, #6B1F3A, #A03058); color: #fff; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: #000; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn:hover { background: var(--accent-hover); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--panel-2); }
+    .btn-danger { background: var(--error); color: #fff; }
+    .btn-danger:hover { background: #DC2626; }
 
-    .status { text-align: center; font-size: 13px; margin-top: 10px;
-        min-height: 18px; opacity: 0; transition: opacity 0.3s; }
-    .status.show { opacity: 1; }
-    .status.error { color: var(--error); }
-    .status.success { color: var(--success); }
-    .status.info { color: var(--accent); }
+    .status { padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-top: 12px; display: none; }
+    .status.show { display: block; }
+    .status.error { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+    .status.success { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+    .status.info { background: rgba(204, 255, 0, 0.15); color: var(--accent); }
 
-    .user-header { display: flex; align-items: center; gap: 12px;
-        padding: 14px; background: var(--panel-2); border-radius: 12px;
-        margin-bottom: 16px; border: 1px solid var(--border); }
-    .avatar { width: 44px; height: 44px; border-radius: 12px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-p));
-        display: flex; align-items: center; justify-content: center;
-        font-weight: 800; font-size: 18px; }
-    .user-name { font-weight: 700; font-size: 15px; }
-    .user-status { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    /* КАБИНЕТ */
+    .cab-tabs { display: flex; gap: 4px; background: var(--panel-2); padding: 4px; border-radius: 10px; margin-bottom: 24px; overflow-x: auto; }
+    .cab-tab { flex: 1; padding: 10px; background: transparent; border: none; color: var(--text-dim); cursor: pointer; border-radius: 6px; font-weight: 600; font-size: 13px; font-family: inherit; transition: 0.2s; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .cab-tab.active { background: var(--accent); color: #000; }
+    .cab-content { display: none; }
+    .cab-content.active { display: block; }
 
-    .section { font-size: 11px; color: var(--text-dim); text-transform: uppercase;
-        letter-spacing: 0.8px; margin: 16px 0 8px; font-weight: 600; }
-    .section::after { content: ''; display: block; height: 1px;
-        background: linear-gradient(90deg, var(--border), transparent); margin-top: 6px; }
+    .balance-card { background: linear-gradient(135deg, var(--panel-2), var(--panel)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-bottom: 20px; text-align: center; }
+    .balance-value { font-size: 42px; font-weight: 900; color: var(--accent); }
+    .balance-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .key-display { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-family: 'Courier New', monospace; font-size: 16px; font-weight: 700; color: var(--accent); text-align: center; word-break: break-all; margin-bottom: 12px; user-select: all; }
 
-    .key-box { background: var(--panel-2); border: 1px solid var(--border);
-        border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 10px;
-        font-family: 'Courier New', monospace; font-size: 14px;
-        color: var(--success); word-break: break-all; user-select: all; }
+    .item-list { display: flex; flex-direction: column; gap: 8px; }
+    .item-row { display: flex; justify-content: space-between; align-items: center; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .item-row h4 { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .item-row p { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+    .item-row .badge { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-left: 8px; }
+    .badge.ok { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+    .badge.wait { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .badge.admin { background: rgba(204, 255, 0, 0.2); color: var(--accent); }
 
-    .user-list { max-height: 300px; overflow-y: auto; }
-    .user-row { display: flex; justify-content: space-between; align-items: center;
-        padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--border);
-        border-radius: 10px; margin-bottom: 6px; font-size: 13px; }
-    .badge { font-size: 9px; padding: 2px 6px; border-radius: 4px;
-        font-weight: 700; text-transform: uppercase; margin-left: 6px; }
-    .badge-ok { background: rgba(58,214,138,0.2); color: var(--success); }
-    .badge-wait { background: rgba(255,184,76,0.2); color: var(--warn); }
-    .badge-admin { background: rgba(157,78,221,0.2); color: var(--accent-p); }
-    .mini { padding: 5px 10px; font-size: 11px; border: none; border-radius: 6px;
-        cursor: pointer; font-weight: 600; font-family: inherit; margin-left: 4px; }
-    .mini-approve { background: var(--success); color: #0A0818; }
-    .mini-revoke { background: #D63A6E; color: #fff; }
-    .mini-danger { background: #6B1F3A; color: #fff; }
+    .mini-btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; margin-left: 6px; transition: 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+    .mini-btn.approve { background: var(--success); color: #fff; }
+    .mini-btn.revoke { background: var(--error); color: #fff; }
+    .mini-btn.role { background: var(--warning); color: #000; }
+    .mini-btn.delete { background: #6B1F3A; color: #fff; }
 
-    .back-btn { position: absolute; top: 14px; left: 14px;
-        width: 30px; height: 30px; border-radius: 8px;
-        background: var(--panel-2); border: 1px solid var(--border);
-        color: var(--text-dim); cursor: pointer; font-size: 14px; }
-    .back-btn:hover { background: var(--accent); color: #fff; }
+    .post-box { background: var(--panel-2); padding: 16px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border); }
+    .post-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
+    .post-author { font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 6px; }
+    .post-date { color: var(--text-dim); }
+    .post-text { font-size: 14px; line-height: 1.5; }
 
-    .loader { display: inline-block; width: 14px; height: 14px;
-        border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
-        border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* FOOTER */
+    .footer { border-top: 1px solid var(--border); padding: 40px 32px; text-align: center; color: var(--text-dim); font-size: 13px; }
+
+    @media (max-width: 768px) {
+        .nav-links { display: none; }
+        .hero h1 { font-size: 42px; letter-spacing: -1px; }
+        .section-title { font-size: 28px; }
+        .section { padding: 60px 0; }
+        .modal { padding: 24px; }
+    }
 </style>
 </head>
 <body>
-<div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
 
-<!-- АВТОРИЗАЦИЯ -->
-<div class="screen active" id="authScreen">
-    <div class="panel">
-        <div class="logo">
-            <div class="logo-icon">A</div>
-            <h1>AffitCrash</h1>
-        </div>
-        <p class="subtitle">Лицензия на мод</p>
+<!-- ИКОНКИ -->
+<svg style="display: none;">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h10v2H7zm0-3h10v2H7z"/></symbol>
+    <symbol id="i-forum" viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></symbol>
+    <symbol id="i-shop" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+    <symbol id="i-configs" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 8h-3v3h-2v-3h-3v-2h3V9h2v3h3v2z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></symbol>
+    <symbol id="i-account" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></symbol>
+    <symbol id="i-buy" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18h20v2H2zm2.5-3l2.5-6 5 4 5-4 2.5 6h-15z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+    <symbol id="i-sword" viewBox="0 0 24 24"><path d="M6.92 5H5l9 9 1-.94L6.92 5zm12.65 12.65l-1.41-1.41L8.83 6.92 7.42 5.5 2 10.92l5.42 5.42 1.41-1.41 8.34 8.34 1.41 1.41 2.99-2.99z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+    <symbol id="i-diamond" viewBox="0 0 24 24"><path d="M12 2l-3 5h6l-3-5zm-1.73 5H4.5l2.5 5.5L10.27 7zm-5.2 0H2l4.5 5.5L5.07 7zm3.2 7.5l1.73-3H7.73l.54 3zm3.46-3h-3.46l-1.73 3h6.92l-1.73-3zm.54 3l-1.73-3H8.81l1.73 3h4.54zm2.46-3h-3.46l-1.73 3h4.54l-1.73-3zm2.54 5.5L21.5 7h-2.57l-1.73 5.5 3.27 3.5zm-2.13 0l-3.27-3.5H7.27l3.27 3.5h3.46z"/></symbol>
+</svg>
 
-        <div class="tabs">
-            <button class="tab active" id="tabLogin">Вход</button>
-            <button class="tab" id="tabReg">Регистрация</button>
-        </div>
-
-        <div class="field"><input id="username" placeholder="Имя пользователя"></div>
-        <div class="field"><input id="password" type="password" placeholder="Пароль"></div>
-
-        <button class="btn btn-primary" id="authBtn">
-            <span id="authBtnText">Войти</span>
-        </button>
-        <p class="status" id="status"></p>
+<!-- ШАПКА -->
+<nav class="nav">
+    <div class="nav-logo">
+        <div class="nav-logo-icon">A</div>
+        <span>AffitCrash</span>
     </div>
-</div>
+    <div class="nav-links">
+        <a href="#features">Возможности</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#" onclick="openAuth('login')"><svg class="svg-icon sm"><use href="#i-forum"/></svg> Форум</a>
+    </div>
+    <div style="display: flex; gap: 8px;">
+        <button class="nav-btn nav-btn-outline" onclick="openAuth('login')">
+            <svg class="svg-icon sm"><use href="#i-account"/></svg> Войти
+        </button>
+        <button class="nav-btn" onclick="openAuth('register')">Регистрация</button>
+    </div>
+</nav>
 
-<!-- КАБИНЕТ -->
-<div class="screen" id="cabinetScreen">
-    <div class="panel" style="max-width: 520px;">
-        <button class="back-btn" onclick="logout()">←</button>
-        <div class="logo">
-            <div class="logo-icon">A</div>
-            <h1>AffitCrash</h1>
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Fabric 1.21 · v1.0.0
         </div>
+        <h1>Мод для <span>Minecraft</span><br>нового поколения</h1>
+        <p>Методы, макросы, бинды, Pro-подписка, магазин конфигов. Всё в одном клиенте с облачной синхронизацией.</p>
+        <div class="hero-actions">
+            <button class="hero-btn primary" onclick="openAuth('register')">
+                <svg class="svg-icon"><use href="#i-play"/></svg> Начать бесплатно
+            </button>
+            <button class="hero-btn secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+                Смотреть тарифы
+            </button>
+        </div>
+    </div>
+</section>
 
-        <div class="user-header">
-            <div class="avatar" id="avatar">?</div>
-            <div>
-                <div class="user-name" id="cabUser">user</div>
-                <div class="user-status" id="cabStatus">Пользователь</div>
+<!-- ВОЗМОЖНОСТИ -->
+<section class="section" id="features">
+    <div class="container">
+        <h2 class="section-title">Возможности</h2>
+        <p class="section-subtitle">Всё, что нужно для комфортной игры</p>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-sword"/></svg></div>
+                <h3>Методы</h3>
+                <p>Наборы команд на бинды. Одна кнопка — все действия.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-bolt"/></svg></div>
+                <h3>Макросы</h3>
+                <p>Повторы, задержки, авто-режим. Настрой под себя.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-palette"/></svg></div>
+                <h3>Темы</h3>
+                <p>7 встроенных тем + кастомные.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-cloud"/></svg></div>
+                <h3>Облако</h3>
+                <p>Синхронизация методов между устройствами.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-shop"/></svg></div>
+                <h3>Магазин</h3>
+                <p>Покупай готовые конфиги за Аффиты.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><svg class="svg-icon lg"><use href="#i-star"/></svg></div>
+                <h3>Pro</h3>
+                <p>Эксклюзивные конфиги + 100 Аффитов в неделю.</p>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="section">Твой лицензионный ключ</div>
-        <div class="key-box" id="licenseKey">—</div>
-        <button class="btn btn-secondary" onclick="copyKey()" style="margin-bottom:10px;">📋 Копировать</button>
+<!-- ТАРИФЫ -->
+<section class="section" id="pricing">
+    <div class="container">
+        <h2 class="section-title">Тарифы</h2>
+        <p class="section-subtitle">Выбери свой уровень</p>
+        <div class="pricing">
+            <div class="price-card">
+                <div class="price-name">Free</div>
+                <div class="price-desc">Базовый доступ</div>
+                <div class="price-value">0 <small>AFF</small></div>
+                <ul class="price-features">
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> Все методы и макросы</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> 7 тем оформления</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> Облачная синхронизация</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> Магазин конфигов</li>
+                </ul>
+                <button class="price-btn secondary" onclick="openAuth('register')">Начать</button>
+            </div>
+            <div class="price-card featured">
+                <div class="price-name">Pro</div>
+                <div class="price-desc">Для серьёзных игроков</div>
+                <div class="price-value">500 <small>AFF</small></div>
+                <ul class="price-features">
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> Всё из Free</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-star"/></svg> Эксклюзивные конфиги</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-diamond"/></svg> +100 Аффитов в неделю</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-gift"/></svg> +10 Аффитов за покупку</li>
+                </ul>
+                <button class="price-btn primary" onclick="openAuth('login')">Купить Pro</button>
+            </div>
+            <div class="price-card">
+                <div class="price-name"><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-crown"/></svg> Admin</div>
+                <div class="price-desc">Для создателей</div>
+                <div class="price-value">∞ <small>AFF</small></div>
+                <ul class="price-features">
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-check"/></svg> Всё из Pro</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-settings"/></svg> Админ-панель</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-news"/></svg> Публикация новостей</li>
+                    <li><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-account"/></svg> Управление юзерами</li>
+                </ul>
+                <button class="price-btn secondary" disabled>По приглашению</button>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <!-- === ЛАУНЧЕР === -->
-        <div class="section">Клиент</div>
-        <button class="btn btn-primary" onclick="downloadLauncher()" style="margin-bottom:10px;">
-            🖥 Скачать лаунчер
-        </button>
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 AffitCrash. Все права защищены.
+</div>
 
-        <div class="section">Смена пароля</div>
-        <div class="field"><input id="newPassword" type="password" placeholder="Новый пароль"></div>
-        <button class="btn btn-primary" id="changePassBtn">Сменить пароль</button>
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeAuth()"><svg class="svg-icon"><use href="#i-close"/></svg></button>
 
-        <div id="adminBlock" style="display:none;">
-            <div class="section">Админ-панель</div>
-            <button class="btn btn-secondary" onclick="loadUsers()" style="margin-bottom:8px;">🔄 Обновить список</button>
-            <div class="user-list" id="userList"></div>
+        <div id="authForms">
+            <h2 id="authTitle"><svg class="svg-icon"><use href="#i-account"/></svg> Вход</h2>
+            <div class="cab-tabs" style="margin-bottom: 24px;">
+                <button class="cab-tab active" id="tabLogin" onclick="switchAuth('login')">Вход</button>
+                <button class="cab-tab" id="tabReg" onclick="switchAuth('register')">Регистрация</button>
+            </div>
+            <div class="field">
+                <label>Имя пользователя</label>
+                <input id="authUsername" type="text" placeholder="username" autocomplete="username">
+            </div>
+            <div class="field">
+                <label>Пароль</label>
+                <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+            <button class="btn" id="authBtn" onclick="doAuth()">Войти</button>
+            <div class="status" id="authStatus"></div>
         </div>
 
-        <div class="section">Сессия</div>
-        <button class="btn btn-danger" onclick="logout()">Выйти</button>
-        <p class="status" id="cabStatusMsg"></p>
+        <div id="cabinetView" style="display: none;">
+            <h2 id="cabUsername" style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                <svg class="svg-icon"><use href="#i-account"/></svg> <span>username</span>
+            </h2>
+            <p id="cabRole" style="color: var(--text-dim); font-size: 13px; margin-bottom: 24px;"></p>
+
+            <div class="cab-tabs">
+                <button class="cab-tab active" onclick="switchCab('profile')">
+                    <svg class="svg-icon sm"><use href="#i-account"/></svg> Профиль
+                </button>
+                <button class="cab-tab" onclick="switchCab('shop')">
+                    <svg class="svg-icon sm"><use href="#i-shop"/></svg> Магазин
+                </button>
+                <button class="cab-tab" onclick="switchCab('forum')">
+                    <svg class="svg-icon sm"><use href="#i-forum"/></svg> Форум
+                </button>
+                <button class="cab-tab" id="adminTab" style="display: none;" onclick="switchCab('admin')">
+                    <svg class="svg-icon sm"><use href="#i-crown"/></svg> Админ
+                </button>
+            </div>
+
+            <!-- Профиль -->
+            <div class="cab-content active" id="cab-profile">
+                <div class="balance-card">
+                    <div class="balance-value" id="cabBalance">0</div>
+                    <div class="balance-label">Аффитов на балансе</div>
+                </div>
+                <div class="field">
+                    <label>Твой лицензионный ключ</label>
+                    <div class="key-display" id="cabKey">—</div>
+                    <button class="btn btn-outline" onclick="copyKey()">
+                        <svg class="svg-icon sm"><use href="#i-check"/></svg> Скопировать
+                    </button>
+                </div>
+                <div class="field" style="margin-top: 20px;">
+                    <label>Промокод</label>
+                    <input id="promoInput" type="text" placeholder="Введи код">
+                    <button class="btn" style="margin-top: 8px;" onclick="usePromo()">
+                        <svg class="svg-icon sm"><use href="#i-gift"/></svg> Активировать
+                    </button>
+                    <div class="status" id="promoStatus"></div>
+                </div>
+                <div class="field" style="margin-top: 20px;">
+                    <label>Смена пароля</label>
+                    <input id="newPassword" type="password" placeholder="Новый пароль">
+                    <button class="btn btn-outline" style="margin-top: 8px;" onclick="changePassword()">Сменить</button>
+                    <div class="status" id="passStatus"></div>
+                </div>
+                <button class="btn btn-danger" style="margin-top: 20px;" onclick="logout()">Выйти из аккаунта</button>
+            </div>
+
+            <!-- Магазин -->
+            <div class="cab-content" id="cab-shop">
+                <h3 style="margin-bottom: 16px;">Конфиги в продаже</h3>
+                <div class="item-list" id="shopList"></div>
+                <h3 style="margin: 24px 0 16px;">Купленные</h3>
+                <div class="item-list" id="ownedList"></div>
+                <h3 style="margin: 24px 0 16px;">Pro-подписка</h3>
+                <button class="btn" onclick="buyPro()">
+                    <svg class="svg-icon sm"><use href="#i-star"/></svg> Купить Pro (500 AFF)
+                </button>
+                <button class="btn btn-outline" style="margin-top: 8px;" onclick="claimProBonus()">
+                    <svg class="svg-icon sm"><use href="#i-gift"/></svg> Забрать бонус Pro
+                </button>
+                <div class="status" id="proStatus"></div>
+            </div>
+
+            <!-- Форум -->
+            <div class="cab-content" id="cab-forum">
+                <div id="forumMain" style="display: block;">
+                    <h3 style="margin-bottom: 16px;">Темы на форуме</h3>
+                    <div class="item-list" id="forumThreadsList"></div>
+                    <h3 style="margin: 24px 0 16px;">Создать тему</h3>
+                    <div class="field">
+                        <input id="newThreadTitleSite" placeholder="Название темы">
+                    </div>
+                    <button class="btn" onclick="createThreadSite()">Создать</button>
+                </div>
+
+                <div id="siteThreadView" style="display: none;">
+                    <button class="btn btn-outline" style="margin-bottom: 16px;" onclick="closeThreadSite()">← Назад к темам</button>
+                    <h3 id="siteThreadTitle" style="margin-bottom: 16px;"></h3>
+                    <div id="siteThreadPosts" class="item-list" style="margin-bottom: 16px;"></div>
+                    <div class="field">
+                        <textarea id="siteReplyContent" placeholder="Твой ответ..."></textarea>
+                    </div>
+                    <button class="btn" onclick="sendReplySite()">Отправить</button>
+                </div>
+            </div>
+
+            <!-- Админ -->
+            <div class="cab-content" id="cab-admin">
+                <h3 style="margin-bottom: 16px;">Пользователи</h3>
+                <div class="item-list" id="usersList"></div>
+                <h3 style="margin: 24px 0 16px;">Публикация новости</h3>
+                <div class="field">
+                    <label>Заголовок</label>
+                    <input id="newsTitle" type="text" placeholder="Заголовок">
+                </div>
+                <div class="field">
+                    <label>Текст</label>
+                    <textarea id="newsContent" placeholder="Текст новости..."></textarea>
+                </div>
+                <button class="btn" onclick="publishNews()">
+                    <svg class="svg-icon sm"><use href="#i-news"/></svg> Опубликовать
+                </button>
+                <div class="status" id="newsStatus"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-// ⚠️ ЗАМЕНИ НА СВОЙ URL
-const SERVER_URL = "https://affitcrash-server.onrender.com";
-const LAUNCHER_DOWNLOAD_URL = "https://www.dropbox.com/scl/fi/2vzbnkb2rsmy6noiumydz/AffitCrash.exe?rlkey=ylmzchu5tky0yoac6wq17qrjt&st=xv2tq722&dl=1";
+    const SERVER_URL = "https://affitcrash-server.onrender.com";
+    let token = null, user = null, isRegister = false, currentThreadId = null;
 
-let currentToken = null;
-let currentUser = null;
-let isRegister = false;
+    function $(id) { return document.getElementById(id); }
 
-function $(id) { return document.getElementById(id); }
+    function setStatus(id, msg, type = 'info') {
+        const el = $(id);
+        el.textContent = msg;
+        el.className = 'status show ' + type;
+        setTimeout(() => el.classList.remove('show'), 5000);
+    }
 
-function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    $(id).classList.add('active');
-}
+    function apiHeaders() {
+        return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+    }
 
-function setStatus(id, msg, type = '') {
-    const el = $(id);
-    el.textContent = msg;
-    el.className = 'status show ' + type;
-    if (msg) setTimeout(() => el.classList.remove('show'), 5000);
-}
+    // === МОДАЛКА ===
+    function openAuth(mode) {
+        $('authModal').classList.add('active');
+        if (token) showCabinet(); else switchAuth(mode);
+    }
+    function closeAuth() { $('authModal').classList.remove('active'); }
+    function switchAuth(mode) {
+        isRegister = mode === 'register';
+        $('tabLogin').classList.toggle('active', !isRegister);
+        $('tabReg').classList.toggle('active', isRegister);
+        $('authTitle').innerHTML = isRegister ? '<svg class="svg-icon"><use href="#i-account"/></svg> Регистрация' : '<svg class="svg-icon"><use href="#i-account"/></svg> Вход';
+        $('authBtn').textContent = isRegister ? 'Зарегистрироваться' : 'Войти';
+    }
 
-$('tabLogin').onclick = () => {
-    isRegister = false;
-    $('tabLogin').classList.add('active');
-    $('tabReg').classList.remove('active');
-    $('authBtnText').textContent = 'Войти';
-};
+    // === АВТОРИЗАЦИЯ ===
+    async function doAuth() {
+        const username = $('authUsername').value.trim();
+        const password = $('authPassword').value;
+        if (!username || !password) return setStatus('authStatus', 'Заполни поля', 'error');
 
-$('tabReg').onclick = () => {
-    isRegister = true;
-    $('tabReg').classList.add('active');
-    $('tabLogin').classList.remove('active');
-    $('authBtnText').textContent = 'Зарегистрироваться';
-};
+        $('authBtn').disabled = true;
+        try {
+            const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login';
+            const res = await fetch(SERVER_URL + endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await res.json();
 
-$('authBtn').onclick = async () => {
-    const u = $('username').value.trim();
-    const p = $('password').value;
+            if (!data.success) return setStatus('authStatus', data.error, 'error');
 
-    if (!u || !p) return setStatus('status', 'Заполни все поля', 'error');
-    if (u.length < 3) return setStatus('status', 'Имя короткое', 'error');
-    if (p.length < 4) return setStatus('status', 'Пароль короткий', 'error');
-
-    const btn = $('authBtn');
-    btn.disabled = true;
-    $('authBtnText').innerHTML = '<span class="loader"></span>';
-
-    try {
-        const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login';
-        const r = await fetch(SERVER_URL + endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: u, password: p }),
-        });
-        const data = await r.json();
-
-        if (!data.success) {
-            setStatus('status', data.error || 'Ошибка', 'error');
-            return;
-        }
-
-        if (isRegister) {
-            setStatus('status', data.message, 'success');
-            if (data.licenseKey) {
-                setTimeout(() => {
-                    $('tabLogin').click();
-                    setStatus('status', 'Теперь войди', 'info');
-                }, 1500);
+            if (isRegister) {
+                setStatus('authStatus', data.message, 'success');
+                if (data.licenseKey) setTimeout(() => switchAuth('login'), 2000);
+            } else {
+                token = data.token; user = data.user;
+                sessionStorage.setItem('ac_token', token);
+                sessionStorage.setItem('ac_user', JSON.stringify(user));
+                showCabinet();
             }
-        } else {
-            currentToken = data.token;
-            currentUser = data.user;
-            sessionStorage.setItem('ac_token', currentToken);
-            sessionStorage.setItem('ac_user', JSON.stringify(currentUser));
-            setStatus('status', 'Успешно!', 'success');
-            setTimeout(showCabinet, 400);
-        }
-    } catch (e) {
-        setStatus('status', 'Ошибка сети', 'error');
-    } finally {
-        btn.disabled = false;
-        $('authBtnText').textContent = isRegister ? 'Зарегистрироваться' : 'Войти';
+        } catch (e) { setStatus('authStatus', 'Ошибка сети', 'error'); }
+        finally { $('authBtn').disabled = false; }
     }
-};
 
-function showCabinet() {
-    showScreen('cabinetScreen');
-    $('cabUser').textContent = currentUser.username;
-    $('avatar').textContent = currentUser.username[0].toUpperCase();
-    $('cabStatus').textContent = currentUser.role === 'admin' ? 'Администратор' : 'Пользователь';
-    $('licenseKey').textContent = currentUser.licenseKey || '—';
-
-    if (currentUser.role === 'admin') {
-        $('adminBlock').style.display = 'block';
-        loadUsers();
+    // === КАБИНЕТ ===
+    function showCabinet() {
+        $('authForms').style.display = 'none';
+        $('cabinetView').style.display = 'block';
+        $('cabUsername').querySelector('span').textContent = user.username;
+        $('cabRole').innerHTML = user.role === 'admin' ? '<svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-crown"/></svg> Администратор' : 'Пользователь';
+        $('cabKey').textContent = user.licenseKey || '—';
+        if (user.role === 'admin') $('adminTab').style.display = 'flex';
+        loadProfile();
     }
-}
 
-// === СКАЧИВАНИЕ ЛАУНЧЕРА ===
-function downloadLauncher() {
-    window.open(LAUNCHER_DOWNLOAD_URL, '_blank');
-    setStatus('cabStatusMsg', '📥 Начинается скачивание лаунчера...', 'info');
-}
+    function switchCab(tab) {
+        document.querySelectorAll('.cab-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.cab-content').forEach(c => c.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        $('cab-' + tab).classList.add('active');
+        if (tab === 'shop') loadShop();
+        if (tab === 'forum') loadForumSite();
+        if (tab === 'admin') loadAdmin();
+    }
 
-function copyKey() {
-    navigator.clipboard.writeText(currentUser.licenseKey);
-    setStatus('cabStatusMsg', '✔ Ключ скопирован', 'success');
-}
+    async function loadProfile() {
+        try {
+            const res = await fetch(SERVER_URL + '/api/shop/me', { headers: apiHeaders() });
+            const data = await res.json();
+            if (data.success) $('cabBalance').textContent = data.balance || 0;
+        } catch (e) {}
+    }
 
-$('changePassBtn').onclick = async () => {
-    const np = $('newPassword').value;
-    if (!np || np.length < 4) return setStatus('cabStatusMsg', 'Короткий пароль', 'error');
+    function copyKey() {
+        navigator.clipboard.writeText(user.licenseKey);
+        setStatus('passStatus', 'Ключ скопирован', 'success');
+    }
 
-    try {
-        const r = await fetch(SERVER_URL + '/api/auth/change-password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + currentToken,
-            },
-            body: JSON.stringify({ newPassword: np }),
+    async function usePromo() {
+        const code = $('promoInput').value.trim();
+        if (!code) return;
+        const res = await fetch(SERVER_URL + '/api/shop/promo', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ code }),
         });
-        const data = await r.json();
-        setStatus('cabStatusMsg', data.message || data.error, data.success ? 'success' : 'error');
+        const data = await res.json();
+        setStatus('promoStatus', data.message || data.error, data.success ? 'success' : 'error');
+        if (data.success) { $('promoInput').value = ''; loadProfile(); }
+    }
+
+    async function changePassword() {
+        const newPassword = $('newPassword').value;
+        if (newPassword.length < 4) return setStatus('passStatus', 'Короткий пароль', 'error');
+        const res = await fetch(SERVER_URL + '/api/auth/change-password', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ newPassword }),
+        });
+        const data = await res.json();
+        setStatus('passStatus', data.message || data.error, data.success ? 'success' : 'error');
         if (data.success) $('newPassword').value = '';
-    } catch (e) {
-        setStatus('cabStatusMsg', 'Ошибка сети', 'error');
     }
-};
 
-async function loadUsers() {
-    const list = $('userList');
-    list.innerHTML = 'Загрузка...';
+    // === МАГАЗИН ===
+    async function loadShop() {
+        const [shopRes, meRes] = await Promise.all([
+            fetch(SERVER_URL + '/api/shop/shop'),
+            fetch(SERVER_URL + '/api/shop/me', { headers: apiHeaders() }),
+        ]);
+        const shop = await shopRes.json();
+        const me = await meRes.json();
 
-    try {
-        const r = await fetch(SERVER_URL + '/api/admin/users', {
-            headers: { 'Authorization': 'Bearer ' + currentToken },
+        $('cabBalance').textContent = me.balance || 0;
+        const shopList = $('shopList');
+        shopList.innerHTML = '';
+        shop.configs.forEach(c => {
+            const owned = me.configs.includes(c.name);
+            shopList.innerHTML += `
+                <div class="item-row">
+                    <div>
+                        <h4><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-configs"/></svg> ${c.name}</h4>
+                        <p>${c.description || 'Без описания'}</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--accent); font-weight: 800;">${c.price} AFF</span>
+                        ${owned
+                            ? `<button class="mini-btn approve" onclick="downloadConfig('${c.name}')"><svg class="svg-icon sm"><use href="#i-download"/></svg></button>`
+                            : `<button class="mini-btn approve" onclick="buyConfig('${c.name}')"><svg class="svg-icon sm"><use href="#i-buy"/></svg></button>`
+                        }
+                    </div>
+                </div>
+            `;
         });
-        const data = await r.json();
 
-        if (!data.success) {
-            list.innerHTML = '<div style="color:#FF5C7A;">' + (data.error || 'Ошибка') + '</div>';
+        const ownedList = $('ownedList');
+        ownedList.innerHTML = '';
+        me.configs.forEach(name => {
+            ownedList.innerHTML += `
+                <div class="item-row">
+                    <div><h4><svg class="svg-icon sm" style="fill:var(--success)"><use href="#i-check"/></svg> ${name}</h4></div>
+                    <button class="mini-btn approve" onclick="downloadConfig('${name}')"><svg class="svg-icon sm"><use href="#i-download"/></svg> Скачать</button>
+                </div>
+            `;
+        });
+    }
+
+    async function buyConfig(name) {
+        const res = await fetch(SERVER_URL + '/api/shop/buy', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ name }),
+        });
+        const data = await res.json();
+        setStatus('proStatus', data.message || data.error, data.success ? 'success' : 'error');
+        if (data.success) loadShop();
+    }
+
+    async function downloadConfig(name) {
+        const res = await fetch(SERVER_URL + '/api/shop/config/' + name, { headers: apiHeaders() });
+        const data = await res.json();
+        if (data.success) {
+            const blob = new Blob([JSON.stringify(data.content, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob); a.download = name + '.affit'; a.click();
+        }
+    }
+
+    async function buyPro() {
+        const res = await fetch(SERVER_URL + '/api/shop/buy-pro', { method: 'POST', headers: apiHeaders() });
+        const data = await res.json();
+        setStatus('proStatus', data.message || data.error, data.success ? 'success' : 'error');
+    }
+
+    async function claimProBonus() {
+        const res = await fetch(SERVER_URL + '/api/shop/pro-bonus', { method: 'POST', headers: apiHeaders() });
+        const data = await res.json();
+        setStatus('proStatus', data.message || data.error, data.success ? 'success' : 'error');
+        if (data.success) loadProfile();
+    }
+
+    // === ФОРУМ ===
+    async function loadForumSite() {
+        const res = await fetch(SERVER_URL + '/api/shop/forum');
+        const data = await res.json();
+        const list = $('forumThreadsList');
+        list.innerHTML = '';
+        if (!data.success || data.threads.length === 0) {
+            list.innerHTML = '<p style="color: var(--text-dim);">Нет тем.</p>';
             return;
         }
+        data.threads.forEach(t => {
+            list.innerHTML += `
+                <div class="item-row" style="cursor: pointer;" onclick="openThreadSite(${t.id})">
+                    <div>
+                        <h4><svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-forum"/></svg> ${t.title}</h4>
+                        <p>Автор: ${t.author}</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
 
+    async function createThreadSite() {
+        const title = $('newThreadTitleSite').value;
+        if (!title) return;
+        await fetch(SERVER_URL + '/api/shop/forum', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ title }),
+        });
+        $('newThreadTitleSite').value = '';
+        loadForumSite();
+    }
+
+    async function openThreadSite(id) {
+        currentThreadId = id;
+        const res = await fetch(SERVER_URL + '/api/shop/forum/' + id);
+        const data = await res.json();
+        if (!data.success) return;
+
+        $('forumMain').style.display = 'none';
+        $('siteThreadView').style.display = 'block';
+        $('siteThreadTitle').innerHTML = `<svg class="svg-icon"><use href="#i-forum"/></svg> ${data.thread.title}`;
+
+        const posts = $('siteThreadPosts');
+        posts.innerHTML = '';
+        data.posts.forEach(p => {
+            posts.innerHTML += `
+                <div class="post-box">
+                    <div class="post-header">
+                        <span class="post-author"><svg class="svg-icon sm"><use href="#i-account"/></svg> ${p.author}</span>
+                        <span class="post-date">${new Date(p.created_at).toLocaleString()}</span>
+                    </div>
+                    <div class="post-text">${p.content}</div>
+                </div>
+            `;
+        });
+    }
+
+    function closeThreadSite() {
+        $('siteThreadView').style.display = 'none';
+        $('forumMain').style.display = 'block';
+        loadForumSite();
+    }
+
+    async function sendReplySite() {
+        const content = $('siteReplyContent').value;
+        if (!content) return;
+        await fetch(SERVER_URL + '/api/shop/forum/' + currentThreadId + '/reply', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ content }),
+        });
+        $('siteReplyContent').value = '';
+        openThreadSite(currentThreadId);
+    }
+
+    // === АДМИН ===
+    async function loadAdmin() {
+        const res = await fetch(SERVER_URL + '/api/admin/users', { headers: apiHeaders() });
+        const data = await res.json();
+        if (!data.success) return;
+
+        const list = $('usersList');
         list.innerHTML = '';
         data.users.forEach(u => {
-            const row = document.createElement('div');
-            row.className = 'user-row';
-
-            const badges = `
-                ${u.approved ? '<span class="badge badge-ok">OK</span>' : '<span class="badge badge-wait">WAIT</span>'}
-                ${u.role === 'admin' ? '<span class="badge badge-admin">ADMIN</span>' : ''}
+            if (u.username === user.username) return;
+            list.innerHTML += `
+                <div class="item-row">
+                    <div>
+                        <h4><svg class="svg-icon sm"><use href="#i-account"/></svg> ${u.username}
+                            ${u.role === 'admin' ? '<svg class="svg-icon sm" style="fill:var(--accent)"><use href="#i-crown"/></svg>' : ''}
+                        </h4>
+                        <p>${u.approved ? '<span class="badge ok">OK</span>' : '<span class="badge wait">WAIT</span>'}</p>
+                    </div>
+                    <div>
+                        <button class="mini-btn approve" onclick="approveUser('${u.username}', ${!u.approved})">
+                            ${u.approved ? 'Забрать' : 'Выдать'}
+                        </button>
+                        <button class="mini-btn role" onclick="setRole('${u.username}', '${u.role === 'admin' ? 'user' : 'admin'}')">
+                            ${u.role === 'admin' ? 'Снять' : 'Админ'}
+                        </button>
+                        <button class="mini-btn delete" onclick="deleteUser('${u.username}')"><svg class="svg-icon sm"><use href="#i-trash"/></svg></button>
+                    </div>
+                </div>
             `;
-
-            row.innerHTML = `<div><b>${u.username}</b>${badges}</div>`;
-
-            const actions = document.createElement('div');
-
-            if (u.username !== currentUser.username) {
-                const approveBtn = document.createElement('button');
-                approveBtn.className = 'mini ' + (u.approved ? 'mini-revoke' : 'mini-approve');
-                approveBtn.textContent = u.approved ? 'Забрать' : 'Выдать';
-                approveBtn.onclick = () => adminAction('/api/admin/approve', { username: u.username, approved: !u.approved });
-                actions.appendChild(approveBtn);
-
-                const roleBtn = document.createElement('button');
-                roleBtn.className = 'mini mini-approve';
-                roleBtn.textContent = u.role === 'admin' ? 'Снять админа' : 'Сделать админом';
-                roleBtn.onclick = () => adminAction('/api/admin/set-role', { username: u.username, role: u.role === 'admin' ? 'user' : 'admin' });
-                actions.appendChild(roleBtn);
-
-                const delBtn = document.createElement('button');
-                delBtn.className = 'mini mini-danger';
-                delBtn.textContent = '🗑';
-                delBtn.onclick = () => { if (confirm('Удалить ' + u.username + '?')) adminAction('/api/admin/delete', { username: u.username }); };
-                actions.appendChild(delBtn);
-            }
-
-            row.appendChild(actions);
-            list.appendChild(row);
         });
-    } catch (e) {
-        list.innerHTML = '<div style="color:#FF5C7A;">Ошибка загрузки</div>';
     }
-}
 
-async function adminAction(endpoint, body) {
-    try {
-        const r = await fetch(SERVER_URL + endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + currentToken,
-            },
-            body: JSON.stringify(body),
+    async function approveUser(username, approved) {
+        await fetch(SERVER_URL + '/api/admin/approve', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ username, approved }),
         });
-        const data = await r.json();
-        setStatus('cabStatusMsg', data.success ? '✔ Готово' : (data.error || 'Ошибка'),
-            data.success ? 'success' : 'error');
-        loadUsers();
-    } catch (e) {
-        setStatus('cabStatusMsg', 'Ошибка сети', 'error');
+        loadAdmin();
     }
-}
 
-function logout() {
-    currentToken = null;
-    currentUser = null;
-    sessionStorage.removeItem('ac_token');
-    sessionStorage.removeItem('ac_user');
-    showScreen('authScreen');
-}
-
-window.addEventListener('load', () => {
-    const t = sessionStorage.getItem('ac_token');
-    const u = sessionStorage.getItem('ac_user');
-    if (t && u) {
-        currentToken = t;
-        currentUser = JSON.parse(u);
-        showCabinet();
+    async function setRole(username, role) {
+        await fetch(SERVER_URL + '/api/admin/set-role', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ username, role }),
+        });
+        loadAdmin();
     }
-});
+
+    async function deleteUser(username) {
+        if (!confirm('Удалить?')) return;
+        await fetch(SERVER_URL + '/api/admin/delete', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ username }),
+        });
+        loadAdmin();
+    }
+
+    async function publishNews() {
+        const title = $('newsTitle').value.trim();
+        const content = $('newsContent').value.trim();
+        if (!title || !content) return;
+        const res = await fetch(SERVER_URL + '/api/admin/news', {
+            method: 'POST', headers: apiHeaders(), body: JSON.stringify({ title, content }),
+        });
+        const data = await res.json();
+        setStatus('newsStatus', data.success ? 'Опубликовано' : data.error, data.success ? 'success' : 'error');
+        if (data.success) { $('newsTitle').value = ''; $('newsContent').value = ''; }
+    }
+
+    // === ВЫХОД ===
+    function logout() {
+        token = null; user = null;
+        sessionStorage.removeItem('ac_token');
+        sessionStorage.removeItem('ac_user');
+        $('authForms').style.display = 'block';
+        $('cabinetView').style.display = 'none';
+        closeAuth();
+    }
+
+    // === АВТОВХОД ===
+    window.addEventListener('load', () => {
+        const t = sessionStorage.getItem('ac_token');
+        const u = sessionStorage.getItem('ac_user');
+        if (t && u) { token = t; user = JSON.parse(u); showCabinet(); }
+    });
+
+    $('authModal').addEventListener('click', (e) => {
+        if (e.target.id === 'authModal') closeAuth();
+    });
 </script>
 </body>
 </html>
