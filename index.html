@@ -18,7 +18,6 @@
     .svg-icon.lg { width: 28px; height: 28px; }
     .svg-icon.sm { width: 16px; height: 16px; }
 
-    /* ШАПКА */
     .nav { position: sticky; top: 0; z-index: 100; background: rgba(14, 14, 16, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
     .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; }
     .nav-logo-icon { width: 32px; height: 32px; background: var(--accent); color: #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; }
@@ -30,13 +29,11 @@
     .nav-btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .nav-btn-outline:hover { background: var(--panel); }
 
-    /* ОБЩИЕ */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
     .section { padding: 80px 0; }
     .section-title { font-size: 40px; font-weight: 900; text-align: center; margin-bottom: 16px; }
     .section-subtitle { font-size: 16px; color: var(--text-dim); text-align: center; margin-bottom: 60px; }
 
-    /* HERO */
     .hero { padding: 100px 0 80px; text-align: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 24px; }
     .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 10px var(--success); }
@@ -50,7 +47,6 @@
     .hero-btn.secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
     .hero-btn.secondary:hover { background: var(--panel-2); }
 
-    /* ВОЗМОЖНОСТИ */
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .feature { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 32px 24px; transition: 0.3s; }
     .feature:hover { border-color: var(--accent); transform: translateY(-4px); }
@@ -58,7 +54,6 @@
     .feature h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
     .feature p { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
 
-    /* ТАРИФЫ */
     .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .price-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px 32px; position: relative; }
     .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(204, 255, 0, 0.15); }
@@ -75,7 +70,6 @@
     .price-btn.secondary { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
     .price-btn.secondary:hover { background: var(--border); }
 
-    /* МОДАЛЬНОЕ ОКНО */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
     .modal-overlay.active { display: flex; }
     .modal { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative; }
@@ -83,7 +77,6 @@
     .modal-close:hover { background: var(--border); color: var(--text); }
     .modal h2 { font-size: 24px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
 
-    /* ФОРМЫ */
     .field { margin-bottom: 16px; }
     .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
     .field input, .field textarea { width: 100%; padding: 12px 16px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; transition: 0.2s; }
@@ -104,7 +97,6 @@
     .status.success { background: rgba(34, 197, 94, 0.15); color: var(--success); }
     .status.info { background: rgba(204, 255, 0, 0.15); color: var(--accent); }
 
-    /* КАБИНЕТ */
     .cab-tabs { display: flex; gap: 4px; background: var(--panel-2); padding: 4px; border-radius: 10px; margin-bottom: 24px; overflow-x: auto; }
     .cab-tab { flex: 1; padding: 10px; background: transparent; border: none; color: var(--text-dim); cursor: pointer; border-radius: 6px; font-weight: 600; font-size: 13px; font-family: inherit; transition: 0.2s; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .cab-tab.active { background: var(--accent); color: #000; }
@@ -137,7 +129,6 @@
     .post-date { color: var(--text-dim); }
     .post-text { font-size: 14px; line-height: 1.5; }
 
-    /* FOOTER */
     .footer { border-top: 1px solid var(--border); padding: 40px 32px; text-align: center; color: var(--text-dim); font-size: 13px; }
 
     @media (max-width: 768px) {
@@ -151,7 +142,6 @@
 </head>
 <body>
 
-<!-- ИКОНКИ -->
 <svg style="display: none;">
     <symbol id="i-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
     <symbol id="i-news" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h10v2H7zm0-3h10v2H7z"/></symbol>
@@ -176,7 +166,6 @@
     <symbol id="i-diamond" viewBox="0 0 24 24"><path d="M12 2l-3 5h6l-3-5zm-1.73 5H4.5l2.5 5.5L10.27 7zm-5.2 0H2l4.5 5.5L5.07 7zm3.2 7.5l1.73-3H7.73l.54 3zm3.46-3h-3.46l-1.73 3h6.92l-1.73-3zm.54 3l-1.73-3H8.81l1.73 3h4.54zm2.46-3h-3.46l-1.73 3h4.54l-1.73-3zm2.54 5.5L21.5 7h-2.57l-1.73 5.5 3.27 3.5zm-2.13 0l-3.27-3.5H7.27l3.27 3.5h3.46z"/></symbol>
 </svg>
 
-<!-- ШАПКА -->
 <nav class="nav">
     <div class="nav-logo">
         <div class="nav-logo-icon">A</div>
@@ -195,7 +184,6 @@
     </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
     <div class="container">
         <div class="hero-badge">
@@ -215,7 +203,6 @@
     </div>
 </section>
 
-<!-- ВОЗМОЖНОСТИ -->
 <section class="section" id="features">
     <div class="container">
         <h2 class="section-title">Возможности</h2>
@@ -255,7 +242,6 @@
     </div>
 </section>
 
-<!-- ТАРИФЫ -->
 <section class="section" id="pricing">
     <div class="container">
         <h2 class="section-title">Тарифы</h2>
@@ -301,12 +287,10 @@
     </div>
 </section>
 
-<!-- FOOTER -->
 <div class="footer">
     © 2026 AffitCrash. Все права защищены.
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО -->
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="modal-close" onclick="closeAuth()"><svg class="svg-icon"><use href="#i-close"/></svg></button>
@@ -350,12 +334,18 @@
                 </button>
             </div>
 
-            <!-- Профиль -->
             <div class="cab-content active" id="cab-profile">
                 <div class="balance-card">
                     <div class="balance-value" id="cabBalance">0</div>
                     <div class="balance-label">Аффитов на балансе</div>
                 </div>
+
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-accent" onclick="downloadLauncher()">
+                        <svg class="svg-icon sm"><use href="#i-download"/></svg> Скачать лаунчер
+                    </button>
+                </div>
+
                 <div class="field">
                     <label>Твой лицензионный ключ</label>
                     <div class="key-display" id="cabKey">—</div>
@@ -380,7 +370,6 @@
                 <button class="btn btn-danger" style="margin-top: 20px;" onclick="logout()">Выйти из аккаунта</button>
             </div>
 
-            <!-- Магазин -->
             <div class="cab-content" id="cab-shop">
                 <h3 style="margin-bottom: 16px;">Конфиги в продаже</h3>
                 <div class="item-list" id="shopList"></div>
@@ -396,7 +385,6 @@
                 <div class="status" id="proStatus"></div>
             </div>
 
-            <!-- Форум -->
             <div class="cab-content" id="cab-forum">
                 <div id="forumMain" style="display: block;">
                     <h3 style="margin-bottom: 16px;">Темы на форуме</h3>
@@ -419,7 +407,6 @@
                 </div>
             </div>
 
-            <!-- Админ -->
             <div class="cab-content" id="cab-admin">
                 <h3 style="margin-bottom: 16px;">Пользователи</h3>
                 <div class="item-list" id="usersList"></div>
@@ -443,6 +430,7 @@
 
 <script>
     const SERVER_URL = "https://affitcrash-server.onrender.com";
+    const LAUNCHER_URL = "https://www.dropbox.com/scl/fi/3cpb2jfnlzrinfqrvjt87/AffitLauncher.exe?rlkey=wa4nmqezwfssji88s45tlnw12&st=gyky9a83&dl=0";
     let token = null, user = null, isRegister = false, currentThreadId = null;
 
     function $(id) { return document.getElementById(id); }
@@ -458,7 +446,10 @@
         return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
     }
 
-    // === МОДАЛКА ===
+    function downloadLauncher() {
+        window.open(LAUNCHER_URL, "_blank");
+    }
+
     function openAuth(mode) {
         $('authModal').classList.add('active');
         if (token) showCabinet(); else switchAuth(mode);
@@ -472,7 +463,6 @@
         $('authBtn').textContent = isRegister ? 'Зарегистрироваться' : 'Войти';
     }
 
-    // === АВТОРИЗАЦИЯ ===
     async function doAuth() {
         const username = $('authUsername').value.trim();
         const password = $('authPassword').value;
@@ -503,7 +493,6 @@
         finally { $('authBtn').disabled = false; }
     }
 
-    // === КАБИНЕТ ===
     function showCabinet() {
         $('authForms').style.display = 'none';
         $('cabinetView').style.display = 'block';
@@ -559,7 +548,6 @@
         if (data.success) $('newPassword').value = '';
     }
 
-    // === МАГАЗИН ===
     async function loadShop() {
         const [shopRes, meRes] = await Promise.all([
             fetch(SERVER_URL + '/api/shop/shop'),
@@ -634,7 +622,6 @@
         if (data.success) loadProfile();
     }
 
-    // === ФОРУМ ===
     async function loadForumSite() {
         const res = await fetch(SERVER_URL + '/api/shop/forum');
         const data = await res.json();
@@ -707,7 +694,6 @@
         openThreadSite(currentThreadId);
     }
 
-    // === АДМИН ===
     async function loadAdmin() {
         const res = await fetch(SERVER_URL + '/api/admin/users', { headers: apiHeaders() });
         const data = await res.json();
@@ -773,7 +759,6 @@
         if (data.success) { $('newsTitle').value = ''; $('newsContent').value = ''; }
     }
 
-    // === ВЫХОД ===
     function logout() {
         token = null; user = null;
         sessionStorage.removeItem('ac_token');
@@ -783,7 +768,6 @@
         closeAuth();
     }
 
-    // === АВТОВХОД ===
     window.addEventListener('load', () => {
         const t = sessionStorage.getItem('ac_token');
         const u = sessionStorage.getItem('ac_user');
